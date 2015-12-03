@@ -1,0 +1,360 @@
+<html> 
+
+<div id="mynetwork" ></div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.5.0/vis.min.js"></script>
+<script>
+
+// Assign handlers immediately after making the request,
+// and remember the jqXHR object for this request
+var jqxhr = $.ajax( "http://localhost:8080/flare.json" )
+  .done(function(data) {
+    alert( "success" );
+ console.log(data)
+ 
+// Perform other work here ...
+
+// node.push
+  // create an array with nodes
+  var nodes = [
+    	{id: 1, label: 'World of warcraft'},
+    	{id: 2, label: 'Horde'},
+    	{id: 3, label: 'Garrosh Hellscream'},
+    	{id: 4, label: 'Sylvanas Whisperwind'},
+		{id: 5, label: 'Voljin'},
+		{id: 6, label: 'Leaders'},
+		{id: 7, label: 'Alliance'},
+		{id: 8, label: 'Tyrande Whisperwind'},
+		{id: 9, label: 'King Varian Wrynn'},
+		{id: 10, label: 'City'},
+		{id: 11, label: 'Silvermoon'},
+		{id: 12, label: 'Weapons'},
+		{id: 13, label: 'polearms'},
+		{id: 14, label: '2 handed swords'},
+		{id: 15, label: '1 handed swords'},
+		{id: 16, label: 'daggers'},
+		{id: 17, label: 'staves'},
+		{id: 18, label: 'Fist-Weapons'},
+		{id: 19, label: 'Raids'},
+		{id: 20, label: 'Raid 1'},
+		{id: 21, label: 'Raid 2'},
+		{id: 22, label: 'Raid 3'},
+		{id: 23, label: 'Raid 4'},
+		{id: 24, label: 'Raid 5'},
+		{id: 25, label: 'Raid 6'},
+		{id: 26, label: 'Raid 7'},
+		{id: 27, label: 'Raid 8'},
+		{id: 28, label: 'Raid 9'},
+		{id: 29, label: 'Raid 10'},
+		{id: 30, label: 'Raid 11'},
+		{id: 31, label: 'Raid 12'},
+		{id: 32, label: 'Raid 15'},
+		{id: 33, label: 'Raid 16'},
+		{id: 34, label: 'Raid 17'},
+		{id: 35, label: 'Raid 18'},
+		{id: 36, label: 'Class'},
+		{id: 37, label: 'Shaman'},
+		{id: 38, label: 'Rouge'},
+		{id: 39, label: 'Priest'},
+		{id: 40, label: 'Warrior'},
+		{id: 41, label: 'Monk'},
+		{id: 42, label: 'Death Knight'},
+		{id: 43, label: 'Demon Hunter'},
+		{id: 44, label: 'Races'},
+		{id: 45, label: 'Night Elf'},
+		{id: 46, label: 'Blood Elf'},
+		{id: 47, label: 'Human'},
+		{id: 48, label: 'Tauren'},
+		{id: 49, label: 'Visual'},
+		{id: 50, label: 'Transmog'},
+		{id: 51, label: 'Mounts'},
+		{id: 52, label: 'Holiday Gear'},
+		{id: 53, label: 'Vanity Items'},
+		{id: 54, label: 'Achievements'},
+		{id: 55, label: 'Raids Achievements'},
+		{id: 56, label: 'Transmog Achievements'},
+		{id: 57, label: 'Mount Achievements'},
+		{id: 58, label: 'PVP Achievements'},
+		{id: 59, label: 'Undead'},
+		{id: 60, label: 'Goblin'},
+		{id: 61, label: 'Troll'},
+		{id: 62, label: 'Gnome'},
+		{id: 63, label: 'Dwarf'},
+		{id: 64, label: 'Draenei'},
+		{id: 65, label: 'Worgen'},
+		{id: 66, label: 'Eastlands'},
+		{id: 67, label: 'The Exodar'},
+		{id: 68, label: 'Ironforge'},
+		
+			{id: 1, label: 'World of warcraft'},
+    	{id: 2, label: 'Horde'},
+    	{id: 3, label: 'Garrosh Hellscream'},
+    	{id: 4, label: 'Sylvanas Whisperwind'},
+		{id: 5, label: 'Voljin'},
+		{id: 6, label: 'Leaders'},
+		{id: 7, label: 'Alliance'},
+		{id: 8, label: 'Tyrande Whisperwind'},
+		{id: 9, label: 'King Varian Wrynn'},
+		{id: 10, label: 'City'},
+		{id: 11, label: 'Silvermoon'},
+		{id: 12, label: 'Weapons'},
+		{id: 13, label: 'polearms'},
+		{id: 14, label: '2 handed swords'},
+		{id: 15, label: '1 handed swords'},
+		{id: 16, label: 'daggers'},
+		{id: 17, label: 'staves'},
+		{id: 18, label: 'Fist-Weapons'},
+		{id: 19, label: 'Raids'},
+		{id: 20, label: 'Raid 1'},
+		{id: 21, label: 'Raid 2'},
+		{id: 22, label: 'Raid 3'},
+		{id: 23, label: 'Raid 4'},
+		{id: 24, label: 'Raid 5'},
+		{id: 25, label: 'Raid 6'},
+		{id: 26, label: 'Raid 7'},
+		{id: 27, label: 'Raid 8'},
+		{id: 28, label: 'Raid 9'},
+		{id: 29, label: 'Raid 10'},
+		{id: 30, label: 'Raid 11'},
+		{id: 31, label: 'Raid 12'},
+		{id: 32, label: 'Raid 15'},
+		{id: 33, label: 'Raid 16'},
+		{id: 34, label: 'Raid 17'},
+		{id: 35, label: 'Raid 18'},
+		{id: 36, label: 'Class'},
+		{id: 37, label: 'Shaman'},
+		{id: 38, label: 'Rouge'},
+		{id: 39, label: 'Priest'},
+		{id: 40, label: 'Warrior'},
+		{id: 41, label: 'Monk'},
+		{id: 42, label: 'Death Knight'},
+		{id: 43, label: 'Demon Hunter'},
+		{id: 44, label: 'Races'},
+		{id: 45, label: 'Night Elf'},
+		{id: 46, label: 'Blood Elf'},
+		{id: 47, label: 'Human'},
+		{id: 48, label: 'Tauren'},
+		{id: 49, label: 'Visual'},
+		{id: 50, label: 'Transmog'},
+		{id: 51, label: 'Mounts'},
+		{id: 52, label: 'Holiday Gear'},
+		{id: 53, label: 'Vanity Items'},
+		{id: 54, label: 'Achievements'},
+		{id: 55, label: 'Raids Achievements'},
+		{id: 56, label: 'Transmog Achievements'},
+		{id: 57, label: 'Mount Achievements'},
+		{id: 58, label: 'PVP Achievements'},
+		{id: 59, label: 'Undead'},
+		{id: 60, label: 'Goblin'},
+		{id: 61, label: 'Troll'},
+		{id: 62, label: 'Gnome'},
+		{id: 63, label: 'Dwarf'},
+		{id: 64, label: 'Draenei'},
+		{id: 65, label: 'Worgen'},
+		{id: 66, label: 'Eastlands'},
+		{id: 67, label: 'The Exodar'},
+		{id: 68, label: 'Ironforge'},
+
+//     {id: 2, label: 'Drag me', x:150, y:130, physics:false},
+//     {id: 3, label: 'Obstacle', x:80, y:-80, fixed:true, mass:10}
+  ];
+
+  // create an array with edges
+  var edges = [
+     	{from: 1 , to: 2, arrows:'to'},
+     	{from: 6 , to: 3, arrows:'to'},
+     	{from: 6 , to: 4, arrows:'to'},
+     	{from: 6 , to: 5, arrows:'to'},
+     	{from: 2 , to: 6, arrows:'to'},
+     	{from: 2 , to: 7, arrows:'to'},
+	 	{from: 2 , to: 8, arrows:'to'},
+	 	{from: 6 , to: 9, arrows:'to'},
+     	{from: 10 , to: 11, arrows:'to'},
+     	{from: 12 , to: 13 , arrows:'to'},
+	 	{from: 12 , to: 14 , arrows:'to'},
+	 	{from: 12 , to: 15 , arrows:'to'},   
+	 	{from: 12 , to: 16, arrows:'to'},
+	 	{from: 12 , to: 17 , arrows:'to'},
+	 	{from: 12 , to: 18 , arrows:'to'},
+	 	{from: 19 , to: 20 , arrows:'to'},
+	 	{from: 19 , to: 21 , arrows:'to'},
+	 	{from: 19, to: 22 , arrows:'to'},
+	 	{from: 19 , to: 23 , arrows:'to'},
+	 	{from: 19 , to: 24 , arrows:'to'},
+	 	{from: 19, to: 25 , arrows:'to'},
+	 	{from: 19 , to: 26 , arrows:'to'},
+	 	{from: 19 , to: 27 , arrows:'to'},
+	 	{from: 19 , to: 28 , arrows:'to'},
+	 	{from: 19 , to: 28 , arrows:'to'},
+	 	{from: 19 , to: 29 , arrows:'to'},
+	 	{from: 19 , to: 30 , arrows:'to'},
+	 	{from: 19 , to: 31 , arrows:'to'},
+	 	{from: 19 , to: 32 , arrows:'to'},
+	 	{from: 19 , to: 33 , arrows:'to'},
+	 	{from: 19 , to: 34 , arrows:'to'},
+	  	{from: 19 , to: 35 , arrows:'to'},
+	 	{from: 36 , to: 1 , arrows:'to'},
+	 	{from: 36 , to: 37 , arrows:'to'},
+	 	{from: 36 , to: 38 , arrows:'to'},
+		{from: 36 , to: 39 , arrows:'to'},
+	 	{from: 36 , to: 40 , arrows:'to'},
+	  	{from: 36 , to: 41 , arrows:'to'},
+	  	{from: 36 , to: 42 , arrows:'to'},
+	  	{from: 36 , to: 43 , arrows:'to'},
+	  	{from: 10 , to: 1 , arrows:'to'},
+	  	{from: 19 , to: 1 , arrows:'to'},
+	  	{from: 12 , to: 1 , arrows:'to'},
+	  	{from: 44 , to: 1 , arrows:'to'},
+		{from: 44 , to: 45 , arrows:'to'},
+		{from: 44 , to: 46 , arrows:'to'},
+		{from: 44 , to: 47 , arrows:'to'},
+		{from: 44 , to: 48 , arrows:'to'},
+		{from: 49 , to: 48 , arrows:'to'},
+		{from: 49 , to: 1 , arrows:'to'},
+		{from: 50 , to: 49 , arrows:'to'},
+		{from: 51 , to: 49 , arrows:'to'},
+		{from: 52 , to: 49 , arrows:'to'},
+		{from: 53 , to: 49 , arrows:'to'},
+		{from: 54 , to: 1 , arrows:'to'},
+		{from: 55 , to: 54 , arrows:'to'},
+		{from: 56 , to: 54 , arrows:'to'},
+		{from: 57 , to: 54 , arrows:'to'},
+	  	{from: 58 , to: 54 , arrows:'to'},
+	  	{from: 59 , to: 44 , arrows:'to'},
+	  	{from: 60 , to: 44 , arrows:'to'},
+	  	{from: 61 , to: 44 , arrows:'to'},
+	  	{from: 62 , to: 44 , arrows:'to'},
+	  	{from: 63 , to: 44 , arrows:'to'},
+	  	{from: 64 , to: 44 , arrows:'to'},
+	  	{from: 65 , to: 44 , arrows:'to'},
+	  	{from: 66 , to: 44 , arrows:'to'},
+	  	{from: 67 , to: 10 , arrows:'to'},
+	  	{from: 68 , to: 10 , arrows:'to'},
+	  	{from: 69 , to: 10 , arrows:'to'},
+	  	{from: 1 , to: 2, arrows:'to'},
+     	{from: 6 , to: 3, arrows:'to'},
+     	{from: 6 , to: 4, arrows:'to'},
+     	{from: 6 , to: 5, arrows:'to'},
+     	{from: 2 , to: 6, arrows:'to'},
+     	{from: 2 , to: 7, arrows:'to'},
+	 	{from: 2 , to: 8, arrows:'to'},
+	 	{from: 6 , to: 9, arrows:'to'},
+     	{from: 10 , to: 11, arrows:'to'},
+     	{from: 12 , to: 13 , arrows:'to'},
+	 	{from: 12 , to: 14 , arrows:'to'},
+	 	{from: 12 , to: 15 , arrows:'to'},   
+	 	{from: 12 , to: 16, arrows:'to'},
+	 	{from: 12 , to: 17 , arrows:'to'},
+	 	{from: 12 , to: 18 , arrows:'to'},
+	 	{from: 19 , to: 20 , arrows:'to'},
+	 	{from: 19 , to: 21 , arrows:'to'},
+	 	{from: 19, to: 22 , arrows:'to'},
+	 	{from: 19 , to: 23 , arrows:'to'},
+	 	{from: 19 , to: 24 , arrows:'to'},
+	 	{from: 19, to: 25 , arrows:'to'},
+	 	{from: 19 , to: 26 , arrows:'to'},
+	 	{from: 19 , to: 27 , arrows:'to'},
+	 	{from: 19 , to: 28 , arrows:'to'},
+	 	{from: 19 , to: 28 , arrows:'to'},
+	 	{from: 19 , to: 29 , arrows:'to'},
+	 	{from: 19 , to: 30 , arrows:'to'},
+	 	{from: 19 , to: 31 , arrows:'to'},
+	 	{from: 19 , to: 32 , arrows:'to'},
+	 	{from: 19 , to: 33 , arrows:'to'},
+	 	{from: 19 , to: 34 , arrows:'to'},
+	  	{from: 19 , to: 35 , arrows:'to'},
+	 	{from: 36 , to: 1 , arrows:'to'},
+	 	{from: 36 , to: 37 , arrows:'to'},
+	 	{from: 36 , to: 38 , arrows:'to'},
+		{from: 36 , to: 39 , arrows:'to'},
+	 	{from: 36 , to: 40 , arrows:'to'},
+	  	{from: 36 , to: 41 , arrows:'to'},
+	  	{from: 36 , to: 42 , arrows:'to'},
+	  	{from: 36 , to: 43 , arrows:'to'},
+	  	{from: 10 , to: 1 , arrows:'to'},
+	  	{from: 19 , to: 1 , arrows:'to'},
+	  	{from: 12 , to: 1 , arrows:'to'},
+	  	{from: 44 , to: 1 , arrows:'to'},
+		{from: 44 , to: 45 , arrows:'to'},
+		{from: 44 , to: 46 , arrows:'to'},
+		{from: 44 , to: 47 , arrows:'to'},
+		{from: 44 , to: 48 , arrows:'to'},
+		{from: 49 , to: 48 , arrows:'to'},
+		{from: 49 , to: 1 , arrows:'to'},
+		{from: 50 , to: 49 , arrows:'to'},
+		{from: 51 , to: 49 , arrows:'to'},
+		{from: 52 , to: 49 , arrows:'to'},
+		{from: 53 , to: 49 , arrows:'to'},
+		{from: 54 , to: 1 , arrows:'to'},
+		{from: 55 , to: 54 , arrows:'to'},
+		{from: 56 , to: 54 , arrows:'to'},
+		{from: 57 , to: 54 , arrows:'to'},
+	  	{from: 58 , to: 54 , arrows:'to'},
+	  	{from: 59 , to: 44 , arrows:'to'},
+	  	{from: 60 , to: 44 , arrows:'to'},
+	  	{from: 61 , to: 44 , arrows:'to'},
+	  	{from: 62 , to: 44 , arrows:'to'},
+	  	{from: 63 , to: 44 , arrows:'to'},
+	  	{from: 64 , to: 44 , arrows:'to'},
+	  	{from: 65 , to: 44 , arrows:'to'},
+	  	{from: 66 , to: 44 , arrows:'to'},
+	  	{from: 67 , to: 10 , arrows:'to'},
+	  	{from: 68 , to: 10 , arrows:'to'},
+	  	{from: 69 , to: 10 , arrows:'to'},
+	  	
+  ];
+
+
+    for(var i=0; i < data.children.length; i++) {
+    }
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+    physics:true,
+    configure:function (option, path) {
+      if (path.indexOf('smooth') !== -1 || option === 'smooth') {
+        return true;
+      }
+      return false;
+    },
+    edges: {
+      smooth: {
+        type: 'continuous'
+      }
+    }
+  };
+  
+  
+  var options = {
+  manipulation: {
+    addEdge: function(edgeData,callback) {
+      if (edgeData.from === edgeData.to) {
+        var r = confirm("Do you want to connect the node to itself?");
+        if (r === true) {
+          callback(edgeData);
+        }
+      }
+      else {
+        callback(edgeData);
+      }
+    }
+  }
+}
+  
+  
+  var network = new vis.Network(container, data, options);
+  })
+  .fail(function(err) {
+    alert( "error" );
+  })
+  .always(function() {
+    alert( "complete" );
+  });
+
+</script>
+</html>
