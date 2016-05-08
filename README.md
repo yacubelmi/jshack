@@ -1,4 +1,4 @@
 AstonHack 
 
 
-vis.js data visulastion tool
+vis.js data visualisation tool
